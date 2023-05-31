@@ -10,5 +10,15 @@ public class MyGraph<Vertex> {
     public void addVertex(Vertex vertex) {
         list.put(vertex, new LinkedList<>());
     }
-
+    public void addEdge(Vertex source, Vertex destination) {
+        validateVertex(source);
+        validateVertex(destination);
+        list.get(source).add(destination);
+        list.get(destination).add(source);
+    }
+    private void validateVertex(Vertex index) {
+        if (!list.containsKey(index)) {
+            throw new IllegalArgumentException("Vertex " + index + " is out of the range");
+        }
+    }
 }
