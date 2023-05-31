@@ -21,4 +21,15 @@ public class MyGraph<Vertex> {
             throw new IllegalArgumentException("Vertex " + index + " is out of the range");
         }
     }
+    public void printGraph() {
+        for (Map.Entry<Vertex, List<Vertex>> entry : list.entrySet()) {
+            Vertex vertex = entry.getKey();
+            List<Vertex> neighbors = entry.getValue();
+            System.out.print("Vertex " + vertex + " is connected to: ");
+            for (Vertex neighbor : neighbors) {
+                System.out.print(neighbor + " ");
+            }
+            System.out.println();
+        }
+    }
 }
