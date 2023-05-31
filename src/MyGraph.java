@@ -32,4 +32,13 @@ public class MyGraph<Vertex> {
             System.out.println();
         }
     }
+    public void removeEdge(Vertex source, Vertex destination) {
+        validateVertex(source);
+        validateVertex(destination);
+        List<Vertex> neighbors = list.get(source);
+        if (neighbors!=null) {
+            neighbors.remove(destination);
+        }
+        list.get(destination).remove(source);
+    }
 }
