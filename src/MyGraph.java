@@ -2,15 +2,27 @@ import java.util.*;
 
 public class MyGraph<Vertex> {
     private Map<Vertex, List<Edge<Vertex>>> list;
-
+    /**
+     * empty graph.
+     */
     public MyGraph() {
         list = new HashMap<>();
     }
-
+    /**
+     * Adds a vertex to the graph.
+     *
+     * @param vertex the vertex to be added
+     */
     public void addVertex(Vertex vertex) {
         list.put(vertex, new LinkedList<>());
     }
-
+    /**
+     * Adds an edge with a weight between two vertices in the graph
+     *
+     * @param source      the source vertex of the edge
+     * @param destination the destination vertex of the edge
+     * @param weight      the weight of the edge
+     */
     public void addEdge(Vertex source, Vertex destination, double weight) {
         validateVertex(source);
         validateVertex(destination);
@@ -18,13 +30,20 @@ public class MyGraph<Vertex> {
         list.get(source).add(new Edge<>(source, destination, weight));
         list.get(destination).add(new Edge<>(destination, source, weight));
     }
-
+    /**
+     * Validates if a vertex exists in the graph
+     *
+     * @param index the vertex to validate
+     * @throws IllegalArgumentException if the vertex is not found in the graph
+     */
     private void validateVertex(Vertex index) {
         if (!list.containsKey(index)) {
             throw new IllegalArgumentException("Vertex " + index + " is out of the range");
         }
     }
-
+    /**
+     * Prints the graph
+     */
     public void printGraph() {
         for (Map.Entry<Vertex, List<Edge<Vertex>>> entry : list.entrySet()) {
             Vertex vertex = entry.getKey();
@@ -37,7 +56,12 @@ public class MyGraph<Vertex> {
             System.out.println();
         }
     }
-
+    /**
+     * Removes an edge between two vertices in the graph
+     *
+     * @param source      the source vertex of the edge
+     * @param destination the destination vertex of the edge
+     */
     public void removeEdge(Vertex source, Vertex destination) {
         validateVertex(source);
         validateVertex(destination);
@@ -52,7 +76,13 @@ public class MyGraph<Vertex> {
             edges.removeIf(edge -> edge.getDest().equals(source));
         }
     }
-
+    /**
+     * Checks if an edge exists between two vertices in the graph
+     *
+     * @param source      the source vertex of the edge
+     * @param destination the destination vertex of the edge
+     * @return true if an edge exists, false otherwise
+     */
     public boolean hasEdge(Vertex source, Vertex destination) {
         validateVertex(source);
         validateVertex(destination);
@@ -68,6 +98,12 @@ public class MyGraph<Vertex> {
 
         return false;
     }
+    /**
+     * Performs Dijkstra's algorithm to find the shortest distances from a source vertex to all other vertices
+     *
+     * @param source the source vertex
+     * @return a map containing the shortest distances from the source vertex to each vertex in the graph
+     */
     public Map<Vertex, Double> dijkstra(Vertex source) {
         validateVertex(source);
 
@@ -107,7 +143,11 @@ public class MyGraph<Vertex> {
 
         return distances;
     }
-
+    /**
+     * Performs a depth-first search (DFS) starting from a given vertex
+     *
+     * @param start the starting vertex for the DFS
+     */
     public void DFS(Vertex start) {
         validateVertex(start);
         Map<Vertex, Boolean> visited = new HashMap<>();
@@ -116,7 +156,11 @@ public class MyGraph<Vertex> {
         }
         DFSHelper(start, visited);
     }
-
+    /**
+     * Helper method for DFS traversal
+     * @param vertex  The current vertex
+     * @param visited A map to track visited vertices
+     */
     private void DFSHelper(Vertex vertex, Map<Vertex, Boolean> visited) {
         visited.put(vertex, true);
         System.out.print(vertex + " ");
@@ -131,7 +175,10 @@ public class MyGraph<Vertex> {
             }
         }
     }
-
+    /**
+     * Performs a Breadth-First Search traversal starting from a given vertex
+     * @param start The vertex from which to start the BFS traversal
+     */
     public void BFS(Vertex start) {
         validateVertex(start);
         Map<Vertex, Boolean> visited = new HashMap<>();
