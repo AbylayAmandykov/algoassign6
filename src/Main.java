@@ -11,13 +11,15 @@ public class Main {
         temp.addEdge(3, 4, 30);
         temp.printGraph();
         temp.removeEdge(2,3);
-        temp.printGraph();
         System.out.println(temp.hasEdge(1,3));
-        System.out.println(temp.hasEdge(1,2));
-        temp.DFS(1);
+        System.out.println(temp.hasEdge(2,3));
+        System.out.print("DFS: "); temp.DFS(1);
         System.out.println();
-        temp.BFS(1);
+        System.out.print("BFS: "); temp.BFS(1);
         System.out.println();
-        System.out.println(temp.dijkstra(1));
+        temp.addEdge(2, 3, 50);
+        System.out.println(temp.dijkstra(2));
+        temp.removeEdge(2, 3);
+        System.out.println("After removing 2-3 edge: " + temp.dijkstra(2));
     }
 }
