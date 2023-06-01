@@ -68,6 +68,45 @@ public class MyGraph<Vertex> {
 
         return false;
     }
+    public Map<Vertex, Double> dijkstra(Vertex source) {
+        validateVertex(source);
+
+        Map<Vertex, Double> distances = new HashMap<>();
+        PriorityQueue<WeightedGraph<Vertex>> pq = new PriorityQueue<>();
+
+        for (Vertex vertex : list.keySet()) {
+            if (vertex.equals(source)) {
+                distances.put(vertex, 0.0);
+            } else {
+                distances.put(vertex, Double.POSITIVE_INFINITY);
+            }
+            pq.offer(new WeightedGraph<>(vertex, distances.get(vertex)));
+        }
+
+        while (!pq.isEmpty()) {
+            WeightedGraph<Vertex> current = pq.poll();
+            Vertex currentVertex = current.getVertex();
+
+            if (distances.get(currentVertex) < current.getDistance()) {
+                continue;
+            }
+
+            List<Edge<Vertex>> edges = list.get(currentVertex);
+            if (edges != null) {
+                for (Edge<Vertex> edge : edges) {
+                    Vertex neighbor = edge.getDest();
+                    double newDistance = distances.get(currentVertex) + edge.getWeight();
+
+                    if (newDistance < distances.get(neighbor)) {
+                        distances.put(neighbor, newDistance);
+                        pq.offer(new WeightedGraph<>(neighbor, newDistance));
+                    }
+                }
+            }
+        }
+
+        return distances;
+    }
 
     public void DFS(Vertex start) {
         validateVertex(start);
