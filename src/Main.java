@@ -17,5 +17,7 @@ public class Main {
         temp.DFS(1);
         System.out.println();
         temp.BFS(1);
+        System.out.println();
+        System.out.println(temp.dijkstra(1));
     }
 }
