@@ -21,9 +21,19 @@ public class Vertex<V> {
     public void addAdjVertex(Vertex<V> dest, double weight) {
         adjVertices.put(dest, weight);
     }
+    /**
+     * Retrieves the map of adjacent vertices and their associated weights.
+     *
+     * @return the map of adjacent vertices and weights
+     */
     public Map<Vertex<V>, Double> getAdjVertices() {
         return adjVertices;
     }
+    /**
+     * Returns a string representation of the vertex.
+     *
+     * @return a string representation of the vertex
+     */
     @Override
     public String toString() {
         return "Vertex " + this.data;
