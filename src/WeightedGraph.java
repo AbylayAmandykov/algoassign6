@@ -21,11 +21,19 @@ class WeightedGraph<Vertex> implements Comparable<WeightedGraph> {
     public int compareTo(WeightedGraph other) {
         return Integer.compare((int)distance, (int)other.distance);
     }
-
+    /**
+     * Retrieves the vertex of the weighted graph
+     *
+     * @return the vertex
+     */
     public Vertex getVertex() {
         return vertex;
     }
-
+    /**
+     * Retrieves the distance associated with the vertex in the weighted graph.
+     *
+     * @return the distance
+     */
     public double getDistance() {
         return distance;
     }
